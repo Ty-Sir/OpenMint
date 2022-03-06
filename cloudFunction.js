@@ -4,9 +4,9 @@ Moralis.Cloud.define("getCurrentOwner", async (request) => {
   const results = [];
   for (let i = 0; i < queryResults.length; ++i) {
     results.push({
-      "owner": queryResults[i].attributes.currentOwner,
-      "tokenId": queryResults[i].attributes.nftId,
-      "tokenAddress": queryResults[i].attributes.tokenAddress
+      "owner": queryResults[i].get('.currentOwner'),
+      "tokenId": queryResults[i].get('.nftId'),
+      "tokenAddress": queryResults[i].get('.tokenAddress')
     });
   }
   return results;
@@ -19,23 +19,23 @@ Moralis.Cloud.define("getArtwork", async (request) => {
 
   for (let i = 0; i < queryResults.length; ++i) {
     results.push({
-      "cover": queryResults[i].attributes.cover,
-      "path": queryResults[i].attributes.path,
-      "tokenId": queryResults[i].attributes.nftId,
-      "tokenAddress": queryResults[i].attributes.tokenAddress,
-      "name": queryResults[i].attributes.name,
-      "description": queryResults[i].attributes.description,
-      "additionalInfo": queryResults[i].attributes.additionalInfo,
-      "unlockableContent": queryResults[i].attributes.unlockableContent,
-      "creator": queryResults[i].attributes.creator,
-      "fileType": queryResults[i].attributes.fileType,
-      "royalty": queryResults[i].attributes.royalty,
-      "active": queryResults[i].attributes.active,
-      "likes": queryResults[i].attributes.likes,
-      "currentOwner": queryResults[i].attributes.currentOwner,
-      "likers": queryResults[i].attributes.likers,
-      "encouragements": queryResults[i].attributes.encouragements,
-      "encouragers": queryResults[i].attributes.encouragers
+      "cover": queryResults[i].get('.cover'),
+      "path": queryResults[i].get('.path'),
+      "tokenId": queryResults[i].get('.nftId'),
+      "tokenAddress": queryResults[i].get('.tokenAddress'),
+      "name": queryResults[i].get('.name'),
+      "description": queryResults[i].get('.description'),
+      "additionalInfo": queryResults[i].get('.additionalInfo'),
+      "unlockableContent": queryResults[i].get('.unlockableContent'),
+      "creator": queryResults[i].get('.creator'),
+      "fileType": queryResults[i].get('.fileType'),
+      "royalty": queryResults[i].get('.royalty'),
+      "active": queryResults[i].get('.active'),
+      "likes": queryResults[i].get('.likes'),
+      "currentOwner": queryResults[i].get('.currentOwner'),
+      "likers": queryResults[i].get('.likers'),
+      "encouragements": queryResults[i].get('.encouragements'),
+      "encouragers": queryResults[i].get('.encouragers')
     });
   }
   return results;
@@ -48,13 +48,13 @@ Moralis.Cloud.define("getAllUsers", async (request) => {
 
   for (let i = 0; i < queryResults.length; ++i) {
     results.push({
-      "profilePhoto": queryResults[i].attributes.profilePhoto,
-      "username": queryResults[i].attributes.username,
-      "ethAddress": queryResults[i].attributes.ethAddress,
-      "bio": queryResults[i].attributes.bio,
-      "twitter": queryResults[i].attributes.twitter,
-	    "instagram": queryResults[i].attributes.instagram,
-      "amountSold": queryResults[i].attributes.amountSold
+      "profilePhoto": queryResults[i].get('.profilePhoto'),
+      "username": queryResults[i].get('.username'),
+      "ethAddress": queryResults[i].get('.ethAddress'),
+      "bio": queryResults[i].get('.bio'),
+      "twitter": queryResults[i].get('.twitter'),
+	    "instagram": queryResults[i].get('.instagram'),
+      "amountSold": queryResults[i].get('.amountSold')
     });
   }
   return results;
@@ -147,22 +147,22 @@ Moralis.Cloud.define("getOfferDetails", async (request) => {
   const results = [];
   for (let i = 0; i < queryResults.length; ++i) {
     results.push({
-      "offerId": queryResults[i].attributes.offerId,
-      "tokenId": queryResults[i].attributes.tokenId,
-      "tokenAddress": queryResults[i].attributes.tokenAddress,
-      "price": queryResults[i].attributes.price,
-      "isSold": queryResults[i].attributes.isSold,
+      "offerId": queryResults[i].get('.offerId'),
+      "tokenId": queryResults[i].get('.tokenId'),
+      "tokenAddress": queryResults[i].get('.tokenAddress'),
+      "price": queryResults[i].get('.price'),
+      "isSold": queryResults[i].get('.isSold'),
 
-      "owner": queryResults[i].attributes.artwork.attributes.currentOwner,
-      "creator": queryResults[i].attributes.artwork.attributes.creator,
-      "cover": queryResults[i].attributes.artwork.attributes.cover,
-      "name": queryResults[i].attributes.artwork.attributes.name,
-      "fileType": queryResults[i].attributes.artwork.attributes.fileType,
-      "likes": queryResults[i].attributes.artwork.attributes.likes,
-      "active": queryResults[i].attributes.artwork.attributes.active,
-      "royalty": queryResults[i].attributes.artwork.attributes.royalty,
-      "unlockableContent": queryResults[i].attributes.artwork.attributes.unlockableContent,
-      "likers": queryResults[i].attributes.artwork.attributes.likers
+      "owner": queryResults[i].get('.artwork.attributes.currentOwner'),
+      "creator": queryResults[i].get('.artwork.attributes.creator'),
+      "cover": queryResults[i].get('.artwork.attributes.cover'),
+      "name": queryResults[i].get('.artwork.attributes.name'),
+      "fileType": queryResults[i].get('.artwork.attributes.fileType'),
+      "likes": queryResults[i].get('.artwork.attributes.likes'),
+      "active": queryResults[i].get('.artwork.attributes.active'),
+      "royalty": queryResults[i].get('.artwork.attributes.royalty'),
+      "unlockableContent": queryResults[i].get('.artwork.attributes.unlockableContent'),
+      "likers": queryResults[i].get('.artwork.attributes.likers')
     });
   }
   return results;
@@ -176,20 +176,20 @@ Moralis.Cloud.define("getSoldDetails", async (request) => {
 
   for (let i = 0; i < queryResults.length; ++i) {
     results.push({
-      "offerId": queryResults[i].attributes.offerId,
-      "tokenId": queryResults[i].attributes.tokenId,
-      "tokenAddress": queryResults[i].attributes.tokenAddress,
-      "price": queryResults[i].attributes.price,
+      "offerId": queryResults[i].get('.offerId'),
+      "tokenId": queryResults[i].get('.tokenId'),
+      "tokenAddress": queryResults[i].get('.tokenAddress'),
+      "price": queryResults[i].get('.price'),
 
-      "isSold": queryResults[i].attributes.offer.attributes.isSold,
+      "isSold": queryResults[i].get('.offer.attributes.isSold'),
 
-      "owner": queryResults[i].attributes.offer.attributes.artwork.attributes.currentOwner,
-      "cover": queryResults[i].attributes.offer.attributes.artwork.attributes.cover,
-      "name": queryResults[i].attributes.offer.attributes.artwork.attributes.name,
-      "fileType": queryResults[i].attributes.offer.attributes.artwork.attributes.fileType,
-      "likes": queryResults[i].attributes.offer.attributes.artwork.attributes.likes,
-      "active": queryResults[i].attributes.offer.attributes.artwork.attributes.active,
-      "unlockableContent": queryResults[i].attributes.offer.attributes.artwork.attributes.unlockableContent
+      "owner": queryResults[i].get('.offer.attributes.artwork.attributes.currentOwner'),
+      "cover": queryResults[i].get('.offer.attributes.artwork.attributes.cover'),
+      "name": queryResults[i].get('.offer.attributes.artwork.attributes.name'),
+      "fileType": queryResults[i].get('.offer.attributes.artwork.attributes.fileType'),
+      "likes": queryResults[i].get('.offer.attributes.artwork.attributes.likes'),
+      "active": queryResults[i].get('.offer.attributes.artwork.attributes.active'),
+      "unlockableContent": queryResults[i].get('.offer.attributes.artwork.attributes.unlockableContent')
     });
   }
   return results;

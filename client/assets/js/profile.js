@@ -1,12 +1,12 @@
-const appId = ""; // Application id from moralis.io
-const serverUrl = ''; //Server url from moralis.io
+const appId = "UBebrowDeRSW9eZezT6ayvLb6s8pyG6uvsDEOxlF"; // Application id from moralis.io
+const serverUrl = 'https://bmplxqspenpu.usemoralis.com:2053/server'; //Server url from moralis.io
 Moralis.start({ serverUrl, appId });
 
 
 const BASE_URL = "https://api.coingecko.com/api/v3";
 const ETH_USD_PRICE_URL = "/simple/price?ids=ethereum&vs_currencies=usd";
-const openMintTokenAddress = "";
-const openMintMarketplaceAddress = "";
+const openMintTokenAddress = "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e";
+const openMintMarketplaceAddress = "0xFd08b75A47935edB1726773Ab336734993B3e12D";
 const paymentGatewayAddress = "";
 let openMintTokenInstance;
 let openMintMarketplaceInstance;
@@ -19,30 +19,32 @@ let address = url.searchParams.get('address');
 
 $(document).ready(async function(){
   web3 = await Moralis.enableWeb3();
-  openMintTokenInstance = new web3.eth.Contract(abi.OpenMintToken, openMintTokenAddress);
-  openMintMarketplaceInstance = new web3.eth.Contract(abi.OpenMintMarketplace, openMintMarketplaceAddress);
-  paymentGatewayInstance = new web3.eth.Contract(abi.PaymentGateway, paymentGatewayAddress);
-  ifAddressNotInDatabase(address);
-  ethPrice = await getEthPrice();
-  getActiveOwnedArt();
-  getInactiveOwnedArt();
-  getProfileDetails();
-  twitterShareProfile();
-  followBtn();
-  sendTip();
-  getMyBalance();
-  withdrawBtn();
-  getForSaleCount();
-  getOwnsCount();
-  getMintedCount();
-  getLikedCount();
-  getEncouragedCount();
-  getFollowingCount();
-  getFollowerCount();
+  if (typeof(web3.eth) !== "undefined"){
+    openMintTokenInstance = new web3.eth.Contract(abi.OpenMintToken, openMintTokenAddress);
+    openMintMarketplaceInstance = new web3.eth.Contract(abi.OpenMintMarketplace, openMintMarketplaceAddress);
+    paymentGatewayInstance = new web3.eth.Contract(abi.PaymentGateway, paymentGatewayAddress);
+    ifAddressNotInDatabase(address);
+    ethPrice = await getEthPrice();
+    getActiveOwnedArt();
+    getInactiveOwnedArt();
+    getProfileDetails();
+    twitterShareProfile();
+    followBtn();
+    sendTip();
+    getMyBalance();
+    withdrawBtn();
+    getForSaleCount();
+    getOwnsCount();
+    getMintedCount();
+    getLikedCount();
+    getEncouragedCount();
+    getFollowingCount();
+    getFollowerCount();
+  }
 });
 
-async function ifAddressNotInDatabase(address){
-  const params = { ethAddress: address };
+  async function ifAddressNotInDatabase(address){
+    const params = { ethAddress: address };
   let isAddressIn = await Moralis.Cloud.run('isAddressInDatabase', params);
   if(!isAddressIn){
     $('.profileGenerated').html(`<p id="notYetConnectedText">This address has not yet connected their wallet to Open<span class="gradient-text">Mint<span></p>`);

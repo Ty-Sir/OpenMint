@@ -436,7 +436,7 @@ var abi = {
       "stateMutability": "view",
       "type": "function"
     }
-  ],
+  ],   
   OpenMintMarketplace: [
     {
       "inputs": [
@@ -518,7 +518,7 @@ var abi = {
           "type": "bool"
         }
       ],
-      "name": "artworkAdded",
+      "name": "artwork d",
       "type": "event"
     },
     {
@@ -546,43 +546,7 @@ var abi = {
       "name": "artworkRemoved",
       "type": "event"
     },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "tokenAddress",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "buyer",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "price",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "tokenId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "offerId",
-          "type": "uint256"
-        }
-      ],
-      "name": "artworkSold",
-      "type": "event"
-    },
+ ,
     {
       "anonymous": false,
       "inputs": [

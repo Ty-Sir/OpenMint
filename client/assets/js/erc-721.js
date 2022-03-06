@@ -1,13 +1,13 @@
-const appId = ""; // Application id from moralis.io
-const serverUrl = ''; //Server url from moralis.io
+const appId = "UBebrowDeRSW9eZezT6ayvLb6s8pyG6uvsDEOxlF"; // Application id from moralis.io
+const serverUrl = 'https://bmplxqspenpu.usemoralis.com:2053/server'; //Server url from moralis.io
 Moralis.start({ serverUrl, appId });
 
 const user = Moralis.User.current();
-const openMintTokenAddress = "";
-const openMintMarketplaceAddress = "";
+const openMintTokenAddress = "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e";
+const openMintMarketplaceAddress = "0xFd08b75A47935edB1726773Ab336734993B3e12D";
 let openMintTokenInstance;
 let openMintMarketplaceInstance;
-let web3;
+let web3 = new Web3(Moralis.provider); // let web3;
 let nft;
 let cover;
 let royalty = 10;
@@ -18,8 +18,11 @@ console.log(user);
 
 $(document).ready(async function(){
   web3 = await Moralis.enableWeb3();
-  openMintTokenInstance = new web3.eth.Contract(abi.OpenMintToken, openMintTokenAddress);
-  openMintMarketplaceInstance = new web3.eth.Contract(abi.OpenMintMarketplace, openMintMarketplaceAddress);
+  // if (typeof web3.eth !== 'undefined') {
+    openMintTokenInstance = new web3.eth.Contract(abi.OpenMintToken, openMintTokenAddress);
+    openMintMarketplaceInstance = new web3.eth.Contract(abi.OpenMintMarketplace, openMintMarketplaceAddress);
+
+  // }
   ethPrice = await getEthPrice();
   checkIfApproved();
 });
@@ -278,18 +281,18 @@ $("form").on('submit',function(e){
 
 async function checkIfApproved(){
   try{
-    let approved = await openMintTokenInstance.methods.isApprovedForAll(user.attributes.ethAddress, openMintMarketplaceAddress).call();
-    console.log("Approved: " + approved);
-
-    if(approved){
-      $('#setApprovalBtn').css('display', 'none');
-      $('#saveToIPFSBtn').prop('disabled', false);
-      $('#setOffer').prop('disabled', true);
-    } else{
-      $('#setApprovalBtn').css('display', 'block');
-      $('#saveToIPFSBtn').prop('disabled', true);
-      $('#setOffer').prop('disabled', true);
-    }
+      let approved = await openMintTokenInstance.methods.isApprovedForAll(user.attributes.ethAddress, openMintMarketplaceAddress).call();
+      console.log("Approved: " + approved);
+      
+      if(approved){
+        $('#setApprovalBtn').css('display', 'none');
+        $('#saveToIPFSBtn').prop('disabled', false);
+        $('#setOffer').prop('disabled', true);
+      } else{
+        $('#setApprovalBtn').css('display', 'block');
+        $('#saveToIPFSBtn').prop('disabled', true);
+        $('#setOffer').prop('disabled', true);
+      }
   } catch(err){
     console.log(err);
   }
@@ -300,20 +303,22 @@ $('#setApprovalBtn').click(async() =>{
   $('#setApprovalBtn').html(`Setting Approval To Sell <div class="spinner-border spinner-border-sm text-light" role="status">
                               <span class="sr-only">Loading...</span>
                             </div>`);
-  await openMintTokenInstance.methods.setApprovalForAll(openMintMarketplaceAddress, true).send({from: user.attributes.ethAddress}, (err, txHash) => {
-    if(err){
-      alert(err.message);
-      $('#setApprovalBtn').prop('disabled', false);
-      $('#setApprovalBtn').html('Set Approval To Sell')
-    }else{
-      console.log(txHash, "Approval Successfully Granted");
-      $('#saveToIPFSBtn').prop('disabled', false);
-      $('#setApprovalBtn').prop('disabled', true);
-      $('#setApprovalBtn').html('Approval Successfully Granted');
-      $('#setApprovalBtn').removeClass('btn-primary');
-      $('#setApprovalBtn').addClass('btn-success');
-    }
-  });
+  if(typeof(openMintTokenInstance) !== "undefined") {
+    await openMintTokenInstance.methods.setApprovalForAll(openMintMarketplaceAddress, true).send({from: user.attributes.ethAddress}, (err, txHash) => {
+      if(err){
+        alert(err.message);
+        $('#setApprovalBtn').prop('disabled', false);
+        $('#setApprovalBtn').html('Set Approval To Sell')
+      }else {
+        console.log(txHash, "Approval Successfully Granted");
+        $('#saveToIPFSBtn').prop('disabled', false);
+        $('#setApprovalBtn').prop('disabled', true);
+        $('#setApprovalBtn').html('Approval Successfully Granted');
+        $('#setApprovalBtn').removeClass('btn-primary');
+        $('#setApprovalBtn').addClass('btn-success');
+      }
+    });
+  }
 });
 
 $('#saveToIPFSBtn').click(async ()=>{
@@ -377,12 +382,16 @@ async function mint(nftMetadataPath, nftPath){
                                                             <span class="sr-only">Loading...</span>
                                                           </div>`);
   try {
-    let receipt = await openMintTokenInstance.methods.createArtwork(nftMetadataPath, royalty).send({from: user.attributes.ethAddress});
-    $('#saveToIPFSBtn').prop('disabled', true);
-    $('#saveToIPFSBtn').html("Successfully Minted");
-    let tokenId = receipt.events.Transfer.returnValues.tokenId;
-    uploadToDB(tokenId, nftMetadataPath, nftPath);
-    console.log(receipt);
+    // if (typeof(openMintTokenInstance) !== "undefined"){
+      console.log(user.attributes.ethAddress);
+      console.log(nftMetadataPath, royalty);
+      let receipt = await openMintTokenInstance.methods.createArtwork(nftMetadataPath, royalty).send({from: user.attributes.ethAddress});
+      $('#saveToIPFSBtn').prop('disabled', true);
+      $('#saveToIPFSBtn').html("Successfully Minted");
+      let tokenId = receipt.events.Transfer.returnValues.tokenId;
+      uploadToDB(tokenId, nftMetadataPath, nftPath);
+      console.log(receipt);
+    // }
   } catch (err) {
     console.log(err);
     alert("Error minting token");
