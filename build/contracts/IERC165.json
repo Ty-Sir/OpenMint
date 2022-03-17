@@ -30,7 +30,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.0;\n\n/**\n * @dev Interface of the ERC165 standard, as defined in the\n * https://eips.ethereum.org/EIPS/eip-165[EIP].\n *\n * Implementers can declare support of contract interfaces, which can then be\n * queried by others ({ERC165Checker}).\n *\n * For an implementation, see {ERC165}.\n */\ninterface IERC165 {\n    /**\n     * @dev Returns true if this contract implements the interface defined by\n     * `interfaceId`. See the corresponding\n     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]\n     * to learn more about how these ids are created.\n     *\n     * This function call must use less than 30 000 gas.\n     */\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\n}\n",
-  "sourcePath": "/Users/jorgenunes/NFT/OpenMint/contracts/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+  "sourcePath": "/Users/jorgenunes/NFT/freeUkrain/contracts/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
     "exportedSymbols": {
@@ -305,7 +305,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-03-04T13:54:06.989Z",
+  "updatedAt": "2022-03-09T20:22:16.986Z",
   "devdoc": {
     "details": "Interface of the ERC165 standard, as defined in the https://eips.ethereum.org/EIPS/eip-165[EIP]. Implementers can declare support of contract interfaces, which can then be queried by others ({ERC165Checker}). For an implementation, see {ERC165}.",
     "kind": "dev",

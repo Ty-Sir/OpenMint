@@ -4,8 +4,8 @@ Moralis.start({ serverUrl, appId });
 
 const BASE_URL = "https://api.coingecko.com/api/v3";
 const ETH_USD_PRICE_URL = "/simple/price?ids=ethereum&vs_currencies=usd";
-const openMintTokenAddress = "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e";
-const openMintMarketplaceAddress = "0xFd08b75A47935edB1726773Ab336734993B3e12D";
+const openMintTokenAddress = "0xA225078bE5cFa5A4df67C147e8844C371d6c48d2";
+const openMintMarketplaceAddress = "0x565E1000e5848ABD5089E00709C59496f6E32a76";
 let openMintTokenInstance;
 let openMintMarketplaceInstance;
 let web3;

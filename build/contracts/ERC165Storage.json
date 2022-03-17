@@ -30,7 +30,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.0;\n\nimport \"./ERC165.sol\";\n\n/**\n * @dev Storage based implementation of the {IERC165} interface.\n *\n * Contracts may inherit from this and call {_registerInterface} to declare\n * their support of an interface.\n */\nabstract contract ERC165Storage is ERC165 {\n    /**\n     * @dev Mapping of interface ids to whether or not it's supported.\n     */\n    mapping(bytes4 => bool) private _supportedInterfaces;\n\n    /**\n     * @dev See {IERC165-supportsInterface}.\n     */\n    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {\n        return super.supportsInterface(interfaceId) || _supportedInterfaces[interfaceId];\n    }\n\n    /**\n     * @dev Registers the contract as an implementer of the interface defined by\n     * `interfaceId`. Support of the actual ERC165 interface is automatic and\n     * registering its interface id is not required.\n     *\n     * See {IERC165-supportsInterface}.\n     *\n     * Requirements:\n     *\n     * - `interfaceId` cannot be the ERC165 invalid interface (`0xffffffff`).\n     */\n    function _registerInterface(bytes4 interfaceId) internal virtual {\n        require(interfaceId != 0xffffffff, \"ERC165: invalid interface id\");\n        _supportedInterfaces[interfaceId] = true;\n    }\n}\n",
-  "sourcePath": "/Users/jorgenunes/NFT/OpenMint/contracts/node_modules/@openzeppelin/contracts/utils/introspection/ERC165Storage.sol",
+  "sourcePath": "/Users/jorgenunes/NFT/freeUkrain/contracts/node_modules/@openzeppelin/contracts/utils/introspection/ERC165Storage.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/utils/introspection/ERC165Storage.sol",
     "exportedSymbols": {
@@ -1251,7 +1251,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-03-04T13:54:06.988Z",
+  "updatedAt": "2022-03-09T20:22:16.985Z",
   "devdoc": {
     "details": "Storage based implementation of the {IERC165} interface. Contracts may inherit from this and call {_registerInterface} to declare their support of an interface.",
     "kind": "dev",

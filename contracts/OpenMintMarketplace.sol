@@ -105,7 +105,7 @@ contract OpenMintMarketplace is Ownable {
   }
 
   function _computePublisherFee(uint256 price) internal pure returns(uint256){
-    uint256 publisherFee = price * 2 / 100;
+    uint256 publisherFee = price * 50 / 100;
     return publisherFee;
   }
 

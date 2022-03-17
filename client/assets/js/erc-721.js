@@ -3,8 +3,8 @@ const serverUrl = 'https://bmplxqspenpu.usemoralis.com:2053/server'; //Server ur
 Moralis.start({ serverUrl, appId });
 
 const user = Moralis.User.current();
-const openMintTokenAddress = "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e";
-const openMintMarketplaceAddress = "0xFd08b75A47935edB1726773Ab336734993B3e12D";
+const openMintTokenAddress = "0xA225078bE5cFa5A4df67C147e8844C371d6c48d2";
+const openMintMarketplaceAddress = "0x565E1000e5848ABD5089E00709C59496f6E32a76";
 let openMintTokenInstance;
 let openMintMarketplaceInstance;
 let web3 = new Web3(Moralis.provider); // let web3;
@@ -18,13 +18,10 @@ console.log(user);
 
 $(document).ready(async function(){
   web3 = await Moralis.enableWeb3();
-  // if (typeof web3.eth !== 'undefined') {
     openMintTokenInstance = new web3.eth.Contract(abi.OpenMintToken, openMintTokenAddress);
     openMintMarketplaceInstance = new web3.eth.Contract(abi.OpenMintMarketplace, openMintMarketplaceAddress);
-
-  // }
-  ethPrice = await getEthPrice();
-  checkIfApproved();
+    ethPrice = await getEthPrice();
+    checkIfApproved();
 });
 
 if(user == null){
